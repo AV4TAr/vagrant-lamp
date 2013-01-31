@@ -6,8 +6,13 @@ Vagrant::Config.run do |config|
   config.vm.box = "lucid32"
   config.vm.box_url = "http://files.vagrantup.com/lucid32.box"
 
+  config.vm.host_name = "vbox5"
+
   # Assign this VM to a host-only network IP, allowing you to access it via the IP.
   config.vm.network :bridged
+  config.vm.network :hostonly, "192.168.56.5"
+
+  config.vm.share_folder "netbeans", "/srv/netbeans", "/Users/diego/NetBeansProjects/" , :nfs=>true
 
   # Enable provisioning with chef solo, specifying a cookbooks path (relative
   # to this Vagrantfile), and adding some recipes and/or roles.
