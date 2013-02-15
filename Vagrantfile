@@ -13,6 +13,7 @@ Vagrant::Config.run do |config|
   config.vm.network :hostonly, "192.168.56.5"
 
   config.vm.share_folder "netbeans", "/srv/netbeans", "/Users/diego/NetBeansProjects/" , :nfs=>true
+  config.vm.share_folder "zendstudio", "/srv/zendstudio", "/Users/diego/Zend/workspaces/DefaultWorkspace/" , :nfs=>true
 
   # Enable provisioning with chef solo, specifying a cookbooks path (relative
   # to this Vagrantfile), and adding some recipes and/or roles.
@@ -23,7 +24,8 @@ Vagrant::Config.run do |config|
 
     chef.json.merge!({
       "mysql" => {
-        "server_root_password" => "vagrant"
+        "server_root_password" => "vagrant",
+        "bind_address" => "0.0.0.0"
       },
       "oh_my_zsh" => {
         :users => [
