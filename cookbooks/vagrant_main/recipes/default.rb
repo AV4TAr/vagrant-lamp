@@ -14,9 +14,9 @@ include_recipe "apache2::mod_php5"
 end
 
 # Install ruby gems
-%w{ rake mailcatcher }.each do |a_gem|
-  gem_package a_gem
-end
+#%w{ rake mailcatcher }.each do |a_gem|
+#  gem_package a_gem
+#end
 
 # Generate selfsigned ssl
 execute "make-ssl-cert" do
@@ -43,7 +43,7 @@ sites.each do |name|
     server_name site["host"]
     server_aliases site["aliases"]
     docroot site["docroot"]?site["docroot"]:"/vagrant/public/#{site["host"]}"
-  end  
+  end
 
    # Add site info in /etc/hosts
    bash "hosts" do
@@ -53,7 +53,7 @@ end
 
 # Disable default site
 apache_site "default" do
-  enable false  
+  enable false
 end
 
 # Install phpmyadmin
@@ -102,17 +102,17 @@ end
 eth1_ip = node[:network][:interfaces][:eth1][:addresses].select{|key,val| val[:family] == 'inet'}.flatten[0]
 
 # Setup MailCatcher
-bash "mailcatcher" do
-  code "mailcatcher --http-ip #{eth1_ip} --smtp-port 25"
-end
-template "#{node['php']['ext_conf_dir']}/mailcatcher.ini" do
-  source "mailcatcher.ini.erb"
-  owner "root"
-  group "root"
-  mode "0644"
-  action :create
-  notifies :restart, resources("service[apache2]"), :delayed
-end
+#bash "mailcatcher" do
+#  code "mailcatcher --http-ip #{eth1_ip} --smtp-port 25"
+#end
+#template "#{node['php']['ext_conf_dir']}/mailcatcher.ini" do
+#  source "mailcatcher.ini.erb"
+#  owner "root"
+#  group "root"
+#  mode "0644"
+#  action :create
+#  notifies :restart, resources("service[apache2]"), :delayed
+#end
 
 # Fix deprecated php comments style in ini files
 bash "deploy" do
@@ -122,7 +122,7 @@ end
 
 # Install Percona Toolkit
 bash "percona-key" do
-  # Install percona repo key. 
+  # Install percona repo key.
   # We can't use 'apt' recipe, because this command should be run with sudo
   code "sudo apt-key adv --keyserver keys.gnupg.net --recv 1C4CBDCDCD2EFD2A"
 end
