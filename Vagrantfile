@@ -12,8 +12,9 @@ Vagrant::Config.run do |config|
   config.vm.network :bridged
   config.vm.network :hostonly, "192.168.56.5"
 
-  config.vm.share_folder "netbeans", "/srv/netbeans", "/Users/diego/NetBeansProjects/" , :nfs=>true
-  config.vm.share_folder "zendstudio", "/srv/zendstudio", "/Users/diego/Zend/workspaces/DefaultWorkspace/" , :nfs=>true
+  #config.vm.share_folder "netbeans", "/srv/netbeans", "/Users/diego/NetBeansProjects/" , :nfs=>true
+  config.vm.share_folder "netbeans", "/srv/netbeans", "/Users/diego/NetBeansProjects/"
+  config.vm.share_folder "zendstudio", "/srv/zendstudio", "/Users/diego/Zend/workspaces/DefaultWorkspace/"
 
   # Enable provisioning with chef solo, specifying a cookbooks path (relative
   # to this Vagrantfile), and adding some recipes and/or roles.
