@@ -3,6 +3,8 @@ Vagrant LAMP
 
 My default LAMP development stack configuration for Vagrant.
 
+Modified by Diego Sapriza
+
 Installation:
 -------------
 
